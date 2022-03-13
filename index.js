@@ -1,17 +1,19 @@
 require('dotenv').config()
-require('./db/mongoose')
+require('./src/db/mongoose')
 const express = require('express')
 const cors = require('cors')
-const UserRoute = require('./routes/UserRoute')
+const UserRoute = require('./src/routes/UserRoute')
 const app = express()
 const port = process.env.PORT
 
-
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: "*"
+}))
 
 
-app.use('/users', UserRoute)
+app.use('/user', UserRoute)
+
 
 app.listen(port, () =>{
     console.log(`🚀 Server is up on port ${port}`)
