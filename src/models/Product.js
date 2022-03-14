@@ -15,9 +15,17 @@ const productSchema = new mongoose.Schema({
         required: true, 
         default: 0
     },
-    description: String,
-    category: String, 
-    brand: String
+    category: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true 
+    }, 
+    brand: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Brand',
+        required: true 
+    },
+    description: String
 })
 
 module.exports = mongoose.model('Product', productSchema)

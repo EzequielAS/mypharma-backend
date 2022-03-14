@@ -3,6 +3,9 @@ require('./src/db/mongoose')
 const express = require('express')
 const cors = require('cors')
 const UserRoute = require('./src/routes/UserRoute')
+const BrandRoute = require('./src/routes/BrandRoute')
+const CategoryRoute = require('./src/routes/CategoryRoute')
+const ProductRoute = require('./src/routes/ProductRoute')
 const app = express()
 const port = process.env.PORT
 
@@ -13,6 +16,9 @@ app.use(cors({
 
 
 app.use('/user', UserRoute)
+app.use('/brand', BrandRoute)
+app.use('/category', CategoryRoute)
+app.use('/product', ProductRoute)
 
 
 app.listen(port, () =>{

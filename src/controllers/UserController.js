@@ -31,26 +31,14 @@ const login = async (req, res) => {
         if(!isPasswordMatch || !isEmailMatch)
             throw new Error()
 
-        res.status(200).send({ email })
+        res.status(200).json({ email })
     }catch(error){
         res.status(400).send("Verify your datas")
     }   
 }
 
-const me = async (req, res) => {
-    try{
-        const { email } = req.params
-        const user = await User.findOne({ email })
-
-
-        res.status(200).send({ email: user.email })
-    }catch(error){
-        res.status(400).send("Verify your datas")
-    }   
-}
 
 module.exports = {
     register,
-    login,
-    me
+    login
 }
