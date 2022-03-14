@@ -1,5 +1,6 @@
 const Brand = require('../models/Brand')
 const Product = require('../models/Product')
+const logger = require('../utils/logger')
 
 const getBrands = async (req, res) => {
     let searchTerm = req.params.searchTerm
@@ -24,8 +25,10 @@ const createBrand = async (req, res) => {
 
         await brand.save()
 
+        logger.info(`Brand ${name} was created`)
         res.status(201).send("Brand created successfully")
     }catch(error){
+        logger.error(error)
         res.status(400).send(error)
     }   
 }
@@ -41,8 +44,10 @@ const updateBrand = async (req, res) => {
 
         await Brand.findByIdAndUpdate(_id, brand)
 
+        logger.info(`Brand ${name} was updated`)
         res.status(200).send("Brand updated successfully")
     }catch(error){
+        logger.error(error)
         res.status(400).send(error)
     }   
 }
@@ -55,8 +60,10 @@ const deleteBrand = async (req, res) => {
 
         await Brand.findByIdAndDelete(_id)
 
+        logger.info(`Brand ${_id} was deleted`)
         res.status(200).send("Brand deleted successfully")
     }catch(error){
+        logger.error(error)
         res.status(400).send(error)
     }   
 }

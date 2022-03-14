@@ -1,5 +1,6 @@
 const bcryptjs = require('bcryptjs')
 const User = require('../models/User')
+const logger = require('../utils/logger')
 
 const register = async (req, res) => {
     try{
@@ -16,6 +17,7 @@ const register = async (req, res) => {
 
         res.status(201).send("User registered successfully")
     }catch(error){
+        logger.error(error)
         res.status(400).send(error)
     }   
 }
