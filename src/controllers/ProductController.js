@@ -7,16 +7,46 @@ const getProducts = async (req, res) => {
         ? { $or: [
                 { name: {$regex: searchTerm, $options: "$i"} },
                 { description: {$regex: searchTerm, $options: "$i"} },
-                { brand: {$regex: searchTerm, $options: "$i"} },
-                { category: {$regex: searchTerm, $options: "$i"} }
+                { 
+                    'brand.name': { $regex: searchTerm, $options: "$i" } 
+                    
+                },
+                {
+                    'category.name': { $regex: searchTerm, $options: "$i" } 
+                }
             ] 
          }
         : {}
-   
+    
     try{
-        let products = await Product
-            .find(objectToFind)
-            .populate(['category', 'brand'])
+        let products = await Product.aggregate([
+            {
+                $lookup: {
+                    from: 'brands',
+                    localField: 'brand',
+                    foreignField: '_id',
+                    as: 'brand'
+                }
+            },
+            {
+                $unwind: '$brand'
+            },
+            {
+                $lookup: {
+                    from: 'categories',
+                    localField: 'category',
+                    foreignField: '_id',
+                    as: 'category'
+                }
+            },
+            {
+                $unwind: '$category'
+            },
+            {
+                $match: objectToFind
+            }
+        ])
+
 
         res.status(200).json(products)
     }catch(error){
