@@ -14,6 +14,9 @@ app.use(cors({
     origin: "*"
 }))
 
+app.get('/', (req, res) => {
+    res.send('Hello world')   
+})
 
 app.use('/user', UserRoute)
 app.use('/brand', BrandRoute)
