@@ -7,7 +7,7 @@ const BrandRoute = require('./src/routes/BrandRoute')
 const CategoryRoute = require('./src/routes/CategoryRoute')
 const ProductRoute = require('./src/routes/ProductRoute')
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 
 app.use(express.json())
 app.use(cors({
