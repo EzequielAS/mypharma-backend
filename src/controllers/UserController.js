@@ -15,7 +15,9 @@ const register = async (req, res) => {
 
         await user.save()
 
-        res.status(201).send("User registered successfully")
+        res.status(201).send({
+            email
+        })
     }catch(error){
         logger.error(error)
         res.status(400).send(error)
