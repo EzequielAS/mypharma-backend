@@ -9,7 +9,7 @@ const ProductRoute = require('./src/routes/ProductRoute')
 const app = express()
 const port = process.env.PORT || 3000
 
-const whitelist = ['https://mypharma-frontend.vercel.app/', 'https://www.mypharma-frontend.vercel.app/']
+const whitelist = ['https://mypharma-frontend.vercel.app', 'https://www.mypharma-frontend.vercel.app']
 
 const corsOptions = {
    origin: function(origin, callback){
